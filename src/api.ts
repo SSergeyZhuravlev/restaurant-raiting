@@ -8,10 +8,8 @@ export interface Restaurant {
   url: string
 }
 
-export const getRestaurants = (): Promise<Restaurant[]> => {
-  return fetch(`${API_URL}/restaurants/`)
-    .then(res => res.json());
-}
+export const getRestaurants = (): Promise<Restaurant[]> =>
+  fetch(`${API_URL}/restaurants`).then((res) => res.json())
 
 interface UpdateRestaurantRaitingArgs {
   id: Restaurant['id']

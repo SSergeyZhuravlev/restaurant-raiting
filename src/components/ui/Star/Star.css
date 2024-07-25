@@ -1,0 +1,17 @@
+.empty-star:hover,
+.fill-star {
+    fill: rgb(255, 94, 0);
+}
+
+.fill-star:hover {
+    fill: none;
+}
+
+.button-star svg {
+    width: 30px;
+    height: 30px;
+}
+
+.button-star path {
+    stroke: rgb(255, 94, 0);
+}

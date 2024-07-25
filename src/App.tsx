@@ -2,7 +2,8 @@ import LogoIcon from './assets/stair.svg?react'
 import './styles.css'
 import { getRestaurants } from './api/api'
 import { QueryClient, useQuery } from '@tanstack/react-query'
-import { RestaurantCard } from './components/ui/RestaurantCard/RestaurantCard';
+import { RestaurantList } from './components/ui/RestaurantList/RestaurantList';
+import { MainPage } from './components/MainPage/MainPage';
 
 const queryClient = new QueryClient();
 
@@ -24,17 +25,7 @@ function App() {
         </div>
       </header>
       <main>
-        {
-          data?.length ? (
-            <ul>
-              {data.map(({ id, name, description, raiting, url }) => {
-                  return <li key={id}>
-                    <RestaurantCard name={name} description={description} url={url} raiting={raiting} />
-                  </li>})
-              }
-            </ul>
-          ) : null
-        }
+        <MainPage data={data} />
       </main>
       <footer>
         <p>Privacy Policy</p>

@@ -5,25 +5,3 @@
     background-color: transparent;
     cursor: pointer;
 }
-
-.button-star svg {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-}
-
-.button-star path {
-    stroke: orange
-}
-
-.empty-star:hover {
-    fill: orange;
-}
-
-.fill-star {
-    fill: orange;
-}
-
-.fill-star:hover {
-    fill: none;
-}
