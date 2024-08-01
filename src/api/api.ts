@@ -13,6 +13,11 @@ export const getRestaurants = (): Promise<Restaurant[]> => {
     .then(res => res.json());
 }
 
+export const getRestaurantsById = (str: string): Promise<Restaurant> => {
+  return fetch(`${API_URL}/restaurants/?search=${str}`)
+    .then(res => res.json());
+}
+
 interface UpdateRestaurantRaitingArgs {
   id: Restaurant['id']
   raiting: Restaurant['raiting']

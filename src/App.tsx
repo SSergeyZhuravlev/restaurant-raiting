@@ -1,37 +1,43 @@
-import LogoIcon from './assets/stair.svg?react'
 import './styles.css'
 import { getRestaurants } from './api/api'
 import { QueryClient, useQuery } from '@tanstack/react-query'
-import { RestaurantList } from './components/ui/RestaurantList/RestaurantList';
+import { Header } from './components/Layout/Header';
 import { MainPage } from './components/MainPage/MainPage';
+import { Footer } from './components/Layout/Footer';
+import { useEffect, useState } from 'react';
 
 const queryClient = new QueryClient();
 
 function App() {
-  const { data, status } = useQuery({
+  const [pathname, setPathname] = useState('/');
+
+  useEffect(() => {
+    window.addEventListener('popstate', (event) => {
+      setPathname(!event.state ? '/' : event.state.url)
+    })
+
+    return () => {window.onpopstate = null}
+  }, [])
+  // status - добавить
+  const { data,  } = useQuery({
     queryFn: getRestaurants,
     queryKey: ['restaurants'],
   }, queryClient);
 
+  function goToRoute(event: React.BaseSyntheticEvent) {
+      event.preventDefault();
+      const href = event.target.getAttribute('href')
+      history.pushState({url: href}, '', href)
+      setPathname(href);
+  }
+
   return (
     <>
-      <header>
-        <div className="logo">
-          <LogoIcon width={16} height={16} className="logo__icon" />
-          <span>Eats</span>
-        </div>
-        <div className="profile">
-          <img alt="profile" src="/avatar.png" />
-        </div>
-      </header>
+      <Header />
       <main>
-        <MainPage data={data} />
+        { data && <MainPage data={data} pathname={pathname} /> }
       </main>
-      <footer>
-        <p>Privacy Policy</p>
-        <p className="corporation">2022 Eats</p>
-        <p>Terms Of Service</p>
-      </footer>
+      <Footer onClick={goToRoute} />
     </>
   )
 }

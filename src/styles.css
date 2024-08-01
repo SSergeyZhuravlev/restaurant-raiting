@@ -65,15 +65,19 @@ main {
 
 footer {
   display: flex;
-  justify-content: center;
-  gap: 96px;
-
+  flex-direction: column;
+  align-items: center;
   height: 50px;
 
   padding: 24px 0 48px;
   color: #b3adad;
 }
 
-.corporation {
-  align-self: flex-end;
+nav {
+  display: flex;
+  margin-bottom: 20px;
 }
+
+/* .corporation {
+  align-self: flex-end;
+} */
