@@ -13,20 +13,7 @@ export const getRestaurants = (): Promise<Restaurant[]> => {
     .then(res => res.json());
 }
 
-export const getRestaurantsById = (str: string): Promise<Restaurant> => {
-  return fetch(`${API_URL}/restaurants/?search=${str}`)
-    .then(res => res.json());
-}
-
-interface UpdateRestaurantRaitingArgs {
-  id: Restaurant['id']
-  raiting: Restaurant['raiting']
-}
-
-export const updateRestaurantRating = ({
-  id,
-  raiting,
-}: UpdateRestaurantRaitingArgs): Promise<Restaurant> =>
+export const updateRestaurantRating = (id: Restaurant['id'], raiting: Restaurant['raiting']): Promise<Restaurant> =>
   fetch(`${API_URL}/restaurants/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({ raiting }),

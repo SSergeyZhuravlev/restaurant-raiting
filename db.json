@@ -4,14 +4,14 @@
       "id": "1",
       "name": "Mama's Kitchen",
       "description": "American, 4.7 stars",
-      "raiting": 4,
+      "raiting": 2,
       "url": "/mamas-kitchen.png"
     },
     {
       "id": "2",
       "name": "The Burger Joint",
       "description": "American, 4.6 stars",
-      "raiting": 4,
+      "raiting": 3,
       "url": "/burger-joint.png"
     },
     {
