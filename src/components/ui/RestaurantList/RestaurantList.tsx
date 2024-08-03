@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { RestaurantCard } from '../RestaurantCard/RestaurantCard';
-import { Restaurant } from '../../../api';
+import { Restaurant } from '../../../api/api'
 import './RestaurantList.css';
 
 interface RestaurantListProps {
@@ -14,7 +14,7 @@ export const RestaurantList: FC<RestaurantListProps> = ({ restaurantList }) => {
                 {
                     restaurantList.map(({ id, name, description, raiting, url }) => {
                         return <li key={id} className='restaurant-list__item'>
-                            <RestaurantCard name={name} description={description} url={url} raiting={raiting} />
+                            <RestaurantCard id={id} name={name} description={description} url={url} raiting={raiting} />
                         </li>})
                 }
             </ul>
