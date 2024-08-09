@@ -12,9 +12,9 @@ export const RestaurantList: FC<RestaurantListProps> = ({ restaurantList }) => {
         restaurantList?.length ? (
             <ul className='restaurant-list'>
                 {
-                    restaurantList.map(({ id, name, description, raiting, url }) => {
+                    restaurantList.map(({ id, name, description, rating, url }) => {
                         return <li key={id} className='restaurant-list__item'>
-                            <RestaurantCard id={id} name={name} description={description} url={url} raiting={raiting} />
+                            <RestaurantCard id={id} name={name} description={description} url={url} rating={rating} />
                         </li>})
                 }
             </ul>

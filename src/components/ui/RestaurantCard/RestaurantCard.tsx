@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { StarRaiting } from '../StarRaiting/StarRaiting';
+import { StarRating } from '../StarRaiting/StarRating';
 import './RestaurantCard.css';
 // import { updateRestaurantRating } from '../../../api/api';
 
@@ -7,11 +7,11 @@ interface RestaurantCardProps {
     id: string,
     name: string,
     description: string,
-    raiting: number,
+    rating: number,
     url: string,
 }
 
-export const RestaurantCard: FC<RestaurantCardProps> =({ id, name, description, raiting, url }) => {
+export const RestaurantCard: FC<RestaurantCardProps> =({ id, name, description, rating, url }) => {
     return (
         <article className='restaurant-card'>
             <div className='restaurant-card__image-wrapper'>
@@ -21,7 +21,7 @@ export const RestaurantCard: FC<RestaurantCardProps> =({ id, name, description, 
             <div className='restaurant-card__description-wrapper'>
                 <p className='restaurant-card__description'>{description}</p>
             </div>
-            <StarRaiting id={id} raiting={raiting} />
+            <StarRating id={id} rating={rating} />
         </article>
     )
 }

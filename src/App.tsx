@@ -1,18 +1,15 @@
 import './styles.css'
 import { getRestaurants } from './api/api'
 import { useQuery } from '@tanstack/react-query'
-import { Header } from './components/Layout/Header';
-import { MainPage } from './components/MainPage/MainPage';
-import { Footer } from './components/Layout/Footer';
 import { useEffect, useState } from 'react';
 import { queryClient } from './api/queryClient';
+import { BaseLayout } from './components/Layout/BaseLayout';
 
 function App() {
-// status - добавить
-const { data,  } = useQuery({
-  queryFn: getRestaurants,
-  queryKey: ['restaurants'],
-}, queryClient);
+  const { data, status } = useQuery({
+    queryFn: getRestaurants,
+    queryKey: ['restaurants'],
+  }, queryClient);
 
   const [pathname, setPathname] = useState('/');
 
@@ -31,16 +28,8 @@ const { data,  } = useQuery({
       setPathname(href);
   }
 
-  return (
-    <>
-      <Header />
-      <main>
-        { data && <MainPage 
-          data={data} 
-          pathname={pathname} /> }
-      </main>
-      <Footer onClick={goToRoute} />
-    </>
+  return data && (
+    <BaseLayout status={status} data={data} pathname={pathname} goToRoute={goToRoute} />
   )
 }
 

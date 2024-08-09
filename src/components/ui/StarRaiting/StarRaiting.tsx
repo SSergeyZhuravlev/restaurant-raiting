@@ -8,7 +8,6 @@ import { queryClient } from '../../../api/queryClient';
 interface StarRaitingProps {
     id: string,
     raiting: number,
-    // onClick: () => void,
 }
 
 export const StarRaiting: FC<StarRaitingProps> = ({ id, raiting }) => {
@@ -28,18 +27,15 @@ export const StarRaiting: FC<StarRaitingProps> = ({ id, raiting }) => {
                 [...Array(5)].map((_item, index) => {
                     return (
                         <Button 
-                            onClick={() => {
-                                mutateRaitng.mutate()
-                            }} 
                             type='star' 
-                            key={crypto.randomUUID()}>
+                            key={index}>
                             <Star 
                                 className={ index >= hover ? 'empty-star' : 'fill-star' }
-                                onMouseEnter={() => {
-                                    setHover(index)
-                                    // console.log(hover);
-                                }}
+                                onMouseEnter={() => setHover(index)}
                                 onMouseLeave={() => setHover(raiting)} 
+                                onClick={() => {
+                                    mutateRaitng.mutate()
+                                }} 
                             />
                         </Button>
                     )

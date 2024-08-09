@@ -5,7 +5,7 @@ type ButtonProps = {
     type?: 'star' | 'outline',
     children: React.ReactNode,
     href?: string,
-    onClick: () => void,
+    onClick?: () => void,
 }
 
 export const Button: FC<ButtonProps> = ({
