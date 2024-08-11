@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import './InputField.css';
 
 interface InputFieldProps {
-    value?: string | undefined,
+    value: string | undefined,
     placeholder?: string,
     inputType: 'search' | 'input'
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 export const InputField: FC<InputFieldProps> = ({ value, placeholder, inputType = 'input', onChange }) => {

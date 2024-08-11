@@ -1,36 +1,47 @@
-import './styles.css'
-import { getRestaurants } from './api/api'
-import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react';
-import { queryClient } from './api/queryClient';
 import { BaseLayout } from './components/Layout/BaseLayout';
+import { RatingContext } from './context/ratingContext';
+import { RestaurantContext } from './context/restaurantContext';
+import { useRestaurantsData } from './hooks/useRestaurantsData';
+import { updateRestaurantRating } from './api/api';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from './api/queryClient';
+import './styles.css';
 
 function App() {
-  const { data, status } = useQuery({
-    queryFn: getRestaurants,
-    queryKey: ['restaurants'],
-  }, queryClient);
+  const { data, status } = useRestaurantsData();
 
-  const [pathname, setPathname] = useState('/');
+  const { mutate } = useMutation({
+    mutationFn: updateRestaurantRating,
 
-  useEffect(() => {
-    window.addEventListener('popstate', (event) => {
-      setPathname(!event.state ? '/' : event.state.url)
-    })
+    onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['restaurants'] })
+    },
+  }, queryClient)
 
-    return () => {window.onpopstate = null}
-  }, [])
-  
-  function goToRoute(event: React.BaseSyntheticEvent) {
-      event.preventDefault();
-      const href = event.target.getAttribute('href')
-      history.pushState({url: href}, '', href)
-      setPathname(href);
+  switch (status) {
+    case 'pending':
+      return (
+        <main>
+          <p>Пожалуйста, подождите</p>
+        </main>
+      )
+
+    case 'success':
+      return data && (
+        <RestaurantContext.Provider value={{ data, status }}>
+          <RatingContext.Provider value={mutate}>
+            <BaseLayout />
+          </RatingContext.Provider>
+        </RestaurantContext.Provider>
+      )
+
+    case 'error':
+      return (
+        <main>
+          <p>Error!</p>
+        </main>
+      )
   }
-
-  return data && (
-    <BaseLayout status={status} data={data} pathname={pathname} goToRoute={goToRoute} />
-  )
 }
 
 export default App

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { StarRating } from '../StarRaiting/StarRating';
 import './RestaurantCard.css';
-// import { updateRestaurantRating } from '../../../api/api';
 
 interface RestaurantCardProps {
     id: string,
