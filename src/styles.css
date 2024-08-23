@@ -78,8 +78,6 @@ nav {
   margin-bottom: 20px;
 }
 
-.error-field {
-  width: 100%;
-  height: 400px;
-  background-color: red;
-}
+/* .corporation {
+  align-self: flex-end;
+} */

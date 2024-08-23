@@ -1,10 +1,9 @@
-import { useState, FC, useContext } from 'react';
+import { useState, FC } from 'react';
 import { Button } from '../Button/Button';
 import { Star } from '../Star/Star';
-import { RatingContext } from '../../../context/ratingContext';
-// import { updateRestaurantRating } from '../../../api/api';
-// import { useMutation } from '@tanstack/react-query';
-// import { queryClient } from '../../../api/queryClient';
+import { updateRestaurantRating } from '../../../api/api';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../../api/queryClient';
 
 interface StarRatingProps {
     id: string,
@@ -14,8 +13,13 @@ interface StarRatingProps {
 export const StarRating: FC<StarRatingProps> = ({ id, rating }) => {
     const [currentRating, setCurrentRating] = useState<number>(rating);
 
-   const { mutate } = useContext(RatingContext);
-   mutate
+    const mutateRaitng = useMutation({
+        mutationFn: () => updateRestaurantRating(id, currentRating + 1),
+
+        onSuccess() {
+            queryClient.invalidateQueries({ queryKey: ['restaurants'] })
+        },
+    }, queryClient)
 
     return (
         <div className='star-raiting'>
