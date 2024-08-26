@@ -1,9 +1,7 @@
-import { useState, FC } from 'react';
+import { useState, FC, useContext } from 'react';
 import { Button } from '../Button/Button';
 import { Star } from '../Star/Star';
-import { updateRestaurantRating } from '../../../api/api';
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../../../api/queryClient';
+import { RatingContext } from '../../../context/ratingContext';
 
 interface StarRatingProps {
     id: string,
@@ -12,30 +10,23 @@ interface StarRatingProps {
 
 export const StarRating: FC<StarRatingProps> = ({ id, rating }) => {
     const [currentRating, setCurrentRating] = useState<number>(rating);
-
-    const mutateRaitng = useMutation({
-        mutationFn: () => updateRestaurantRating(id, currentRating + 1),
-
-        onSuccess() {
-            queryClient.invalidateQueries({ queryKey: ['restaurants'] })
-        },
-    }, queryClient)
+    const { mutateRating } = useContext(RatingContext);
 
     return (
         <div className='star-raiting'>
             {
-                [...Array(5)].map((_item, index) => {
+                [...Array(5)].map((_, index) => {
                     return (
                         <Button 
                             type='star' 
-                            key={index}>
+                            key={index}
+                            onClick={() => {
+                                mutateRating({id, rating: currentRating + 1})
+                            }} >
                             <Star 
                                 className={ index >= currentRating ? 'empty-star' : 'fill-star' }
                                 onMouseEnter={() => setCurrentRating(index)}
                                 onMouseLeave={() => setCurrentRating(rating)} 
-                                onClick={() => {
-                                    mutateRaitng.mutate()
-                                }} 
                             />
                         </Button>
                     )

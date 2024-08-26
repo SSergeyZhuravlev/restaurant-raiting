@@ -1,36 +1,38 @@
-import './styles.css'
-import { getRestaurants } from './api/api'
-import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react';
-import { queryClient } from './api/queryClient';
 import { BaseLayout } from './components/Layout/BaseLayout';
+import { RatingContext } from './context/ratingContext';
+import { RestaurantContext } from './context/restaurantContext';
+import { useRestaurantsData } from './hooks/useRestaurantsData';
+import { useUpdateRestaurantRating } from './hooks/useUpdateRestaurantsData';
+import './styles.css';
 
 function App() {
-  const { data, status } = useQuery({
-    queryFn: getRestaurants,
-    queryKey: ['restaurants'],
-  }, queryClient);
+  const { data, status } = useRestaurantsData();
+  const mutate = useUpdateRestaurantRating();
 
-  const [pathname, setPathname] = useState('/');
+  switch (status) {
+    case 'pending':
+      return (
+        <main>
+          <p>Пожалуйста, подождите</p>
+        </main>
+      )
 
-  useEffect(() => {
-    window.addEventListener('popstate', (event) => {
-      setPathname(!event.state ? '/' : event.state.url)
-    })
+    case 'success':
+      return data && (
+        <RestaurantContext.Provider value={{ data, status }}>
+          <RatingContext.Provider value={{ mutateRating: mutate }}>
+            <BaseLayout />
+          </RatingContext.Provider>
+        </RestaurantContext.Provider>
+      )
 
-    return () => {window.onpopstate = null}
-  }, [])
-  
-  function goToRoute(event: React.BaseSyntheticEvent) {
-      event.preventDefault();
-      const href = event.target.getAttribute('href')
-      history.pushState({url: href}, '', href)
-      setPathname(href);
+    case 'error':
+      return (
+        <main>
+          <p>Error!</p>
+        </main>
+      )
   }
-
-  return data && (
-    <BaseLayout status={status} data={data} pathname={pathname} goToRoute={goToRoute} />
-  )
 }
 
 export default App

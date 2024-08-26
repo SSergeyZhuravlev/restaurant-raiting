@@ -1,6 +1,6 @@
-import { Restaurant } from "../api/api";
+import { RestaurantListType } from "../api/api";
 
-export const filterRestaurants = (restaurantList: Restaurant[], str: string): Restaurant[] => {
+export const filterRestaurants = (restaurantList: RestaurantListType, str: string): RestaurantListType => {
     return restaurantList.filter((restaurant) => restaurant.name
         .trim()
         .toLowerCase()

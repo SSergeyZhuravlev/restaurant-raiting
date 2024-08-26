@@ -1,17 +1,9 @@
 import { FC } from 'react';
 import { StarRating } from '../StarRaiting/StarRating';
+import { Restaurant } from '../../../api/api';
 import './RestaurantCard.css';
-// import { updateRestaurantRating } from '../../../api/api';
 
-interface RestaurantCardProps {
-    id: string,
-    name: string,
-    description: string,
-    rating: number,
-    url: string,
-}
-
-export const RestaurantCard: FC<RestaurantCardProps> =({ id, name, description, rating, url }) => {
+export const RestaurantCard: FC<Restaurant> =({ id, name, description, rating, url }) => {
     return (
         <article className='restaurant-card'>
             <div className='restaurant-card__image-wrapper'>

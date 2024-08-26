@@ -1,13 +1,13 @@
 .restaurant-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .restaurant-list__item {
-    width: calc(25% - 15px);
+    width: calc(25% - 20px);
 }
 
 .restaurant-list__item:not(:last-child) {
-    margin-right: 15px;
+    margin-right: 20px;
 }

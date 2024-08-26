@@ -5,3 +5,12 @@
     background-color: transparent;
     cursor: pointer;
 }
+
+.button-outline {
+    color: inherit;
+    text-decoration: none;
+}
+
+.button-outline:not(:last-child) {
+    margin-right: 100px;
+}

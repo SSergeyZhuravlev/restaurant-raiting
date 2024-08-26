@@ -3,15 +3,15 @@
     flex-direction: column;
 }
 
-.restaurant-card__image {
-    width: 100%;
-    height: auto;
-    max-height: 135px;
-    border-radius: 10px;
-}
-
 .restaurant-card__image-wrapper {
     margin-bottom: 20px;
+}
+
+.restaurant-card__image {
+    width: 100%;
+    min-height: 233px;
+    max-height: 235px;
+    border-radius: 10px;
 }
 
 .restaurant-card__title {

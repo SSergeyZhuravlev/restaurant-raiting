@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import './Button.css';
 
-type ButtonProps = {
+export type ButtonProps = {
     type?: 'star' | 'outline',
     children: React.ReactNode,
     href?: string,
-    onClick?: () => void,
+    onClick: (event: React.BaseSyntheticEvent) => void,
 }
 
 export const Button: FC<ButtonProps> = ({

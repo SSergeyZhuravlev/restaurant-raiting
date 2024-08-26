@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import { Restaurant } from "../api/api";
+import { RestaurantListType } from "../api/api";
 
 type RestaurantsContextParams = {
-    data: Restaurant[] | [],
+    data: RestaurantListType | [],
     status: string,
 }
 

@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ROUTES } from '../../ROUTES';
-import { NavigationLink } from '../NavigationLink/NavigationLink';
+import { Button } from '../ui/Button/Button';
+import { ButtonProps } from '../ui/Button/Button';
 
 interface FooterProps {
-    onClick: (event: React.SyntheticEvent<HTMLAnchorElement>) => void,
+    onClick: ButtonProps['onClick']
 }
 
 export const Footer: FC<FooterProps> = ({ onClick }) => {
@@ -12,11 +13,11 @@ export const Footer: FC<FooterProps> = ({ onClick }) => {
             <nav>
                 {
                     ROUTES.map((route) => {
-                        return <NavigationLink key={route.id} href={route.path} onClick={onClick}>{route.title}</NavigationLink>
+                        return <Button key={route.id} href={route.path} onClick={onClick}>{route.title}</ Button>
                     })
                 }
             </nav>
-            <p className="corporation">2022 Eats</p>
+            <p className="corporation">2024 Eats</p>
         </footer>
     )
 }
